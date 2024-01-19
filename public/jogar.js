@@ -27,7 +27,7 @@ let myPos = 0;
 let myTeam = '';
 const pr = document.getElementById("root");
 
-$('#userWelcome strong').text(username)
+$('#userWelcome span').text(username)
 
 socket.on('connect', function () {
     socket.emit('adduser', username);
@@ -36,6 +36,7 @@ socket.on('connect', function () {
 
 socket.on('dispRooms', function (rooms) {
     $('.sv').hide();
+    $('.timer-titulo').hide();
     for (let room of rooms) {
         $('.servers').append('<div class="sv buttonG buttonServer" onclick=switchRoom("' + room.name + '")>' +
             room.name + '<span class="svStatus">' + room.status + '</span>' + '<span class="spanR">' + room.q + '/' + room.max + '</span></div>')
@@ -48,7 +49,8 @@ socket.on('ready', function (start) {
 
     socket.emit('go', true);
     tempoPreJogo(5, function () {
-        $('.timer').hide();
+        $('.timer').hide()
+        $('.timer-titulo').hide();
         $('.login').hide();
         $('.game').show();
     });
@@ -57,8 +59,9 @@ socket.on('ready', function (start) {
 function tempoPreJogo(i, callback) {
     callback = callback || function () { };
     let int = setInterval(function () {
-        $('.timer strong').text(i);
-        $('.timer').show();
+        $('.timer-titulo').show();
+        $('.tempo').text(i);
+        $('.tempo').show();
         i-- || (clearInterval(int), callback());
     }, 1000);
 }
@@ -70,8 +73,31 @@ socket.on('gameStart', function (game) {
     gameS(game);
 })
 
-function pedirTruco(valueI) {
+const botaoTruco = document.querySelector('#botao-truco');
+const audioTruco = document.getElementById('pedir-truco');
+
+const botaoSeis = document.getElementById('#botao-seis');
+const audioSeis = document.getElementById('pedir-truco');
+
+const botaoNove = document.getElementById('#botao-truco');
+const audioNove = document.getElementById('pedir-truco');
+
+const botaoDoze = document.getElementById('#botao-truco');
+const audioDoze = document.getElementById('pedir-truco');
+
+const botaoAceitar = document.getElementById('#botao-aceitar');
+const audioAceitar = document.getElementById('pedir-truco');
+
+const botaoCorrer = document.getElementById('#botao-correr');
+const audioCorrer = document.getElementById('pedir-truco');
+
+function gritaTruco(audio) {
+    audio.play();
+}
+
+function pedirTruco(valueI, botaoTruco) {
     socket.emit('pedirTruco', { value: parseInt(valueI) });
+    botaoTruco.addEventListener('click', gritaTruco);
 }
 
 function statusMaoOnze(valueI) {
