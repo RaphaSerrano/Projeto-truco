@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap'); 
+@import url('./capa.css');
+@import url('./bem-vindo.css');
+@import url('./timer.css');
+@import url('./jogo.css');
+@import url('./fim-de-jogo.css');
+
+
+:root{
+    --font-titulo: 'Lilita One', sans-serif;
+    --font-numeros: 'Courier Prime', monospace;
+}
+    
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+        background: -webkit-linear-gradient(left, #5d0404, #000000);
+        background: -moz-linear-gradient(left, #5d0404, #000000);
+        background: -ms-linear-gradient(left, #5d0404, #000000);
+        background: -o-linear-gradient(left, #5d0404, #000000);
+        background: linear-gradient(to right, #5d0404, #000000);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:focus,
+    button:focus {
+        outline: none;
+    }    
+
+    table {
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    td {
+        width: 8px;
+        height: 8px;
+        border: 0;
+    }
+
+    #sketch-holder {
+        max-width: 500px;
+        margin: auto;
+    }
+
+    #userWelcome {
+        text-align: center;
+    }
