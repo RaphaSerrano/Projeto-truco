@@ -1,0 +1,91 @@
+.bem-vindo{
+    font-family: var(--font-titulo);
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 0.5rem;
+
+}
+
+.bem-vindo-nome{
+    color: #FFB534;
+}
+
+.bem-vindo-nome:hover{
+    -webkit-filter: brightness(1.5);
+    filter: brightness(1.5);
+}
+
+.servers{
+    width: 100%;
+}
+
+.spanR {
+    float: right;
+}
+
+
+.svStatus {
+    margin-left: 1rem;
+    color: #0F2167;
+}
+
+@media only screen and (min-width: 901px) {
+
+    .buttonLogout {
+        height: 48px;
+        background-color: #0F0F0F;
+        border-radius: 4px;
+        font-size: 16px;
+        padding: 0 20px;
+        margin-top: 10px;
+        color: #FFF;
+        font-weight: bold;
+        border: 0.1rem solid white;
+        cursor: pointer;
+    } 
+
+    .buttonLogout:hover{
+        background-color: #720303;
+    }
+
+    .buttonServer {
+        background: #FFDD95;
+        border-color: #FF9843;
+        color: #720303;
+        margin-bottom: 5px;
+    }
+
+    .buttonG {
+        width: 100%;
+        border-width: 0 0 4px;
+        padding: 12px 15px;
+        line-height: normal;
+        text-transform: uppercase;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-align: center;
+        text-transform: uppercase;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        vertical-align: middle;
+    }
+
+    .buttonG:active {
+        border-width: 0.25rem;
+        transform: translate3d(0, 4px, 0);
+
+    }
+
+    .buttonG:hover {
+        -webkit-filter: brightness(1.1);
+        filter: brightness(1.1);
+    }
+
+}

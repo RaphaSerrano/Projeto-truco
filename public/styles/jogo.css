@@ -1,0 +1,337 @@
+.myCards {
+    height: 33.33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.mesa {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: linear-gradient(63deg, #092E20 23%, transparent 23%) 7px 0, linear-gradient(63deg, transparent 74%, #092E20 78%), 
+                linear-gradient(63deg, transparent 34%, #092E20 38%, #092E20 58%, transparent 62%), #20351a;
+    background-size: 16px 48px;
+}
+
+.centerTable {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 33.33%;
+}
+
+.lastCards {
+    height: 33.33%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lastCards .centerCards {
+    display: flex;
+}
+
+.lastCards .centerCards img {
+    margin-right: -50px;
+    position: absolute;
+}
+
+.topPlayer {
+    height: 33.33%;
+    min-height: 150px;
+}
+
+.topPlayer .cards img {
+    margin-right: -50px;
+}
+
+
+
+.leftPlayer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    width: 33.33%;
+}
+
+.leftPlayer .cards img,
+.rightPlayer .cards img {
+    transform: rotate(90deg);
+    margin-bottom: -60px;
+}
+
+.rightPlayer .cards {
+    margin-right: -80px;
+}
+
+.leftPlayer .cards {
+    margin-left: -50px;
+}
+
+.topPlayer .cards {
+    margin-top: -50px;
+}
+
+.rightPlayer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    width: 33.33%;
+    justify-content: flex-end;
+}
+
+.coringa {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    text-align: center;
+    top: 0;
+}
+
+.coringa strong {
+    color: white;
+    text-shadow: 0 0 3px #000000, 0 0 5px #000000;
+}
+
+.placar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    display: flex;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.redTeam {
+    padding: 5px;
+    border: 2px solid #c53333;
+    width: 40px;
+    border-radius: 10px;
+    text-align: center;
+    margin-right: 5px;
+    background: #a53535;
+    color: white;
+}
+
+.blueTeam {
+    padding: 5px;
+    border: 2px solid #3352c5;
+    width: 40px;
+    border-radius: 10px;
+    text-align: center;
+    background: #333398;
+    color: white;
+}
+
+.trucoButton {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+    z-index: 100;
+}
+
+.card1 {
+    z-index: 20;
+}
+
+.card2 {
+    z-index: 21;
+}
+
+.card3 {
+    z-index: 22;
+}
+
+.leftPlayer strong,
+.rightPlayer strong,
+.topPlayer strong,
+.myCards strong {
+    position: absolute;
+    color: white;
+    text-shadow: 0 0 3px #000000, 0 0 5px #000000;
+}
+
+@media only screen and (max-width: 900px) {
+
+    .leftPlayer .cards,
+    .rightPlayer .cards {
+        max-width: 100px;
+    }
+
+    .lastCards img,
+    .topPlayer img,
+    .leftPlayer img,
+    .rightPlayer img,
+    .coringa img {
+        height: 100px;
+    }
+
+    .myCards .cards img {
+        height: 100px;
+        margin-left: -40px;
+    }
+
+    .lastCards .centerCards img.fromBottomCard {
+        transform: translate(-30px, 10px);
+        z-index: 201;
+    }
+
+    .lastCards .centerCards img.fromLeftCard {
+        transform: translate(-90px, -60px);
+    }
+
+    .lastCards .centerCards img.fromRightCard {
+        transform: translate(30px, -60px);
+        z-index: 200;
+    }
+
+    .lastCards .centerCards img.fromTopCard {
+        transform: translate(-30px, -140px);
+    }
+
+    .rightPlayer strong {
+        transform: translate(-5px, -60px);
+    }
+
+    .leftPlayer strong {
+        transform: translate(5px, -60px);
+    }
+
+    .topPlayer strong {
+        transform: translate(30px, 50px);
+    }
+
+    .myCards strong {
+        transform: translate(-20px, -100px);
+    }
+}
+    
+@media only screen and (min-width: 901px) {
+
+    .leftPlayer .cards,
+    .rightPlayer .cards {
+        max-width: 150px;
+    }
+
+    .lastCards img,
+    .topPlayer img,
+    .leftPlayer img,
+    .rightPlayer img,
+    .coringa img {
+        height: 150px;
+    }
+
+    .myCards .cards img {
+        height: 150px;
+        margin-left: -50px;
+    }
+
+    .lastCards .centerCards img.fromBottomCard {
+        transform: translate(-80px, 0);
+    }
+
+    .lastCards .centerCards img.fromLeftCard {
+        transform: translate(-220px, -60px);
+    }
+
+    .lastCards .centerCards img.fromRightCard {
+        transform: translate(50px, -60px);
+    }
+
+    .lastCards .centerCards img.fromTopCard {
+        transform: translate(-80px, -190px);
+    }
+
+    .rightPlayer strong {
+        transform: translate(-5px, -130px);
+    }
+
+    .leftPlayer strong {
+        transform: translate(5px, -130px);
+    }
+
+    .topPlayer strong {
+        transform: translate(30px, 100px);
+    }
+
+    .myCards strong {
+        transform: translate(-170px, 0);
+    }
+}
+
+.ssv {
+    max-width: 300px;
+    width: 100%;
+    margin: 10px;
+}
+
+strong.isTurno {
+    color: #48ea4d !important;
+}
+
+.placarRound {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.redTeamRound {
+    padding: 5px;
+    background-color: #a94646;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.blueTeamRound {
+    padding: 5px;
+    background-color: #4657a9;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.empateRound {
+    padding: 5px;
+    background: #8e8e8e;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.red {
+    background-color: #bd3030;
+    border-radius: 10px;
+    padding: 0.3rem 0.7rem;
+}
+
+.blue {
+    background-color: #3044bd;
+    border-radius: 10px;
+    padding: 0.3rem 0.7rem;
+}
+
+.cardGroup1,.cardGroup2{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.cardGroup1 img,.cardGroup2 img{
+    height: 100px;
+}
+
+.redTT {
+    color: #bd3030;
+}
+
+.blueTT {
+    color: #3044bd;
+}

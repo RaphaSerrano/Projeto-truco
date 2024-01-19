@@ -1,0 +1,27 @@
+.game,
+.timer {
+    display: none;
+}
+
+.game {
+    height: 100%;
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;        
+}
+
+.timer-titulo{
+    font-size: 3.5rem;
+    font-family: var(--font-titulo);
+    color: white;
+}
+
+.tempo{
+    font-size: 6rem;
+    font-family: var(--font-numeros);
+    color: white;
+}

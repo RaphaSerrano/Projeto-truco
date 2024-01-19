@@ -1,0 +1,67 @@
+.capa{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.logo{
+    width: 12rem;
+    margin: 0;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: var(--font-titulo);
+    font-size: 3rem;
+    margin-top: 1rem;
+}
+
+.login {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login form {
+    width: 20rem;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.login input {
+    height: 48px;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 0 20px;
+    margin-top: 10px;
+}
+
+.buttonLogin{
+    height: 48px;
+    background-color: #0F0F0F;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 0 20px;
+    margin-top: 10px;
+    color: #FFF;
+    font-weight: bold;
+    border: 0.1rem solid white;
+    cursor: pointer;
+}
+
+.buttonLogin:hover {
+    background-color: #720303;
+}
+
+.buttonLogin:active{
+    background-color: #720303;
+}
