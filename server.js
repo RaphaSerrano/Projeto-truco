@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const Deck = require('./src/deck');
+const RoomManager = require('./src/roomManager');
+const CardEmitter = require('./src/cardEmitter'); 
 
 const app = express();
 const server = require('http').createServer(app);
@@ -71,7 +73,7 @@ io.on('connection', socket => {
                     if (rooms[index2].q == rooms[index2].max) {
                         io.in(socket.room).emit('ready', true);
                     }
-                    updateRoom();
+                    RoomManager.updateRoom(rooms);
                     io.emit('dispRooms', rooms);
                 }
             }
@@ -85,39 +87,11 @@ io.on('connection', socket => {
             rooms[index] = { ...rooms[index], ...new Game(rooms[index].usersname, rooms[index].usersid) };
         }
         //console.log(rooms[index].usersname, rooms[index].usersid)
-        emitCards(index);
+        CardEmitter.emitCards(index, rooms, io);
+
         io.emit('dispRooms', rooms);
     });
-    function emitCards(index) {
-        for (let j = 0; j < 4; j++) {
-            let privatePlayers = [];
-            for (let i = 0; i < 4; i++) {
-                if (rooms[index].game.players[i].id == rooms[index].game.players[j].id) {//entra aki se for eu
-                    privatePlayers.push({
-                        isMe: true,
-                        ...rooms[index].game.players[i]
-                    });
-                } else {
-                    privatePlayers.push({
-                        isMe: false,
-                        idTurno: rooms[index].game.players[i].idTurno,
-                        nome: rooms[index].game.players[i].nome,
-                        id: rooms[index].game.players[i].id,
-                        team: rooms[index].game.players[i].team,
-                        numCartas: rooms[index].game.players[i].numCartas,
-                    })
-                }
-            }
-            let removeCards = {
-                active: true,
-                myPos: rooms[index].game.players[j].idTurno,
-                myTeam: rooms[index].game.players[j].team,
-                ...rooms[index].game.table,
-                players: privatePlayers
-            }
-            io.to(`${rooms[index].game.players[j].id}`).emit('gameStart', removeCards);
-        }
-    }
+    
 
 
     socket.on('disconnect', function () {
@@ -143,22 +117,11 @@ io.on('connection', socket => {
                 rooms[index].game = { active: false };
             }
             socket.leave(socket.room);
-            updateRoom();
+            RoomManager.updateRoom(rooms);
         }
         io.emit('dispRooms', rooms);
     });
 
-    function updateRoom() {
-        for (room of rooms) {
-            if (room.gameStatus != 2) {
-                if (room.q == room.max) {
-                    room.status = 'ready';
-                } else {
-                    room.status = 'waiting...';
-                }
-            }
-        }
-    }
     socket.on('sendCard', function (infos) {
         let index = rooms.findIndex((e) => e.name === socket.room);
         if (index != -1) {
@@ -173,7 +136,8 @@ io.on('connection', socket => {
                 if (rooms[index].game.table.centroMesa.length == 4) {
                     verificaQuemGanhou(index);
                 } else {
-                    emitCards(index);
+                    CardEmitter.emitCards(index, rooms, io);
+
                 }
             }
         }
@@ -236,7 +200,7 @@ io.on('connection', socket => {
         } else {
             rooms[index].game.table.roundPoints.empate++;
         }
-        emitCards(index);
+        CardEmitter.emitCards(index, rooms, io);
         rooms[index].game.table.centroMesa = [];//limpa mesa
         setTimeout(function () {
             //verifica se ja acabou o round
@@ -281,7 +245,8 @@ io.on('connection', socket => {
             criaNovoRound(index);
             verificaFimGame(index);
         } else {
-            emitCards(index);
+            CardEmitter.emitCards(index, rooms, io);
+
         }
     }
     function verificaFimGame(index) {
@@ -289,7 +254,8 @@ io.on('connection', socket => {
             rooms[index].game.table.endGame = true;
             setTimeout(function () {
 
-                emitCards(index);
+                CardEmitter.emitCards(index, rooms, io);
+
                 socket.leave(socket.room);
                 if (rooms[index].gameStatus != 1) {
                     rooms[index].game = { active: false };
@@ -312,7 +278,8 @@ io.on('connection', socket => {
                 }
                 emitCardsMaoOnze(index);
             } else {
-                emitCards(index);
+                CardEmitter.emitCards(index, rooms, io);
+
             }
         }
     }
@@ -456,17 +423,20 @@ io.on('connection', socket => {
                 rooms[index].game.table.valueTruco = rooms[index].game.table.requestTruco.value;
                 rooms[index].game.table.requestTruco.votosCont = 0;
                 rooms[index].game.table.requestTruco.votacao = [];
-                emitCards(index);
+                CardEmitter.emitCards(index, rooms, io);
+
                 rooms[index].game.table.requestTruco.requested = false;
                 setTimeout(function () {
-                    emitCards(index);
+                    CardEmitter.emitCards(index, rooms, io);
+
                 }, 2000);
             } else {//os dois correram
                 if (team == 'red') rooms[index].game.table.teamsPoint.blue += rooms[index].game.table.valueTruco;
                 else rooms[index].game.table.teamsPoint.red += rooms[index].game.table.valueTruco;
                 rooms[index].game.table.requestTruco.status = 'Vamos correr';
                 rooms[index].game.table.requestTruco.playerName = 'Time ' + team;
-                emitCards(index);
+                CardEmitter.emitCards(index, rooms, io);
+
                 criaNovoRound(index);
                 setTimeout(function () {
                     verificaFimGame(index);
@@ -483,7 +453,8 @@ io.on('connection', socket => {
             rooms[index].game.table.requestTruco.playerName = rooms[index].game.players[indexUser].nome;
             rooms[index].game.table.requestTruco.value += 3;
             rooms[index].game.table.requestTruco.status = (rooms[index].game.table.requestTruco.value == 3) ? 'Pedindo Truco' : 'Pedindo ' + rooms[index].game.table.requestTruco.value;
-            emitCards(index);
+            CardEmitter.emitCards(index, rooms, io);
+
         }
     }
     function zeraPedidoTruco(index) {
